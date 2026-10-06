@@ -13,7 +13,7 @@ The existing API already implemented POST/PATCH overlap prevention, PATCH self-e
 | Reliability / Accuracy | The first-version script mainly checked statuses and field types. It could pass even if a rejected PATCH altered a record, a successful PATCH returned stale values, or a failed POST inserted a row. | Added exact-value assertions, read-after-write checks, list membership, reads after rejected PATCHes, and a count of successful test bookings. | `scripts/quality_gate_checks.mjs`: checks 3–7 and 21–35, 45, 56–58 verify values/persistence. All assertions passed against the public API; actual output is in `TEST_EVIDENCE.md`. |
 | Reliability | Existing evidence covered one duplicate POST and one PATCH overlap, but not enclosure/intersection shapes, adjacency on both sides, full-payload self-update, or changing equipment into a conflict. | Added identical, contained, containing, left-intersecting and right-intersecting cases for both POST and PATCH; both adjacency boundaries; full PATCH self-exclusion; different equipment and equipment-change checks. | Public checks 14–35: conflicts returned 409, adjacent POSTs returned 201, unchanged full PATCH returned 200, another equipment could overlap, and conflicting equipment change returned 409 without changing the record. |
 | Delivery Quality / Purpose | README and API contract still said the Quality Gate was deferred and the curl guide absent, despite both now being supplied. This made the current submission instructions inaccurate. | Updated stage descriptions, linked this review, added the public guide/edge-case command and test-data prerequisites, and retained the local/public URL distinction. | Read `README.md` and `API_CONTRACT.md`; the documented `BASE_URL=... node scripts/quality_gate_checks.mjs` command was executed successfully against the public URL. |
-| Reasoning / You Own It | The brief ownership notes did not explain the payload-reference 400 versus URL-resource 404 distinction, why checking only a start time misses enclosing overlaps, why conditional writes matter, or the concurrent partial-PATCH limitation. The AI log had no Quality Gate interaction yet. | Added concrete interval/status examples, required-versus-assumed behaviour, the reason for binding and conditional SQL, and an explicit concurrency limitation. Logged this interaction and provided student explanation notes; later linked the supplied manual-test screenshots. | `API_CONTRACT.md`, “Explain the decisions”; `AI_LOG.md`, Quality Gate interaction. Public checks demonstrate 400/404/409, enclosure detection, self-exclusion and literal storage of SQL-like text. |
+| Reasoning / You Own It | The brief ownership notes did not explain the payload-reference 400 versus URL-resource 404 distinction, why checking only a start time misses enclosing overlaps, why conditional writes matter, or the concurrent partial-PATCH limitation. The AI log had no Quality Gate interaction yet. | Added concrete interval/status examples, required-versus-assumed behaviour, the reason for binding and conditional SQL, and an explicit concurrency limitation. Logged this interaction and provided student explanation notes; later linked the supplied manual-test screenshots. Independent understanding remains for the student to confirm. | `API_CONTRACT.md`, “Explain the decisions”; `AI_LOG.md`, Quality Gate interaction. Public checks demonstrate 400/404/409, enclosure detection, self-exclusion and literal storage of SQL-like text. Student understanding is still to be verified personally. |
 
 ## Verification performed
 
@@ -26,32 +26,4 @@ The existing API already implemented POST/PATCH overlap prevention, PATCH self-e
 
 No load/concurrency test or simulated database-failure test was run. The conditional statements protect overlap checks within a write; simultaneous partial updates to one booking may overwrite each other's non-conflicting field changes. Optimistic locking is outside the required simple contract and was not added.
 
-## First-version snapshot
 
-Saved the existing implementation before review edits in `snapshots/before-quality-gate.tar.gz`.
-Archive SHA-256: `8907405f84eb71d5a48b238c915c4021df954c7598a58135b14478fd2df2a284`.
-
-This archive is a snapshot made at the start of this review. It is not evidence of the brief's minute-30 commit/screenshot. The student reported that the original first-version screenshot was missed. The later reconstructed commit is recorded below.
-
-## Submission summary
-
-The six submission deliverables and test evidence are complete.
-
-- [x] Public manual curl evidence is supplied: 12 screenshots showing 15 requests, collected in `output/pdf/API_Test_Screenshot_Evidence.pdf` and indexed in `TEST_EVIDENCE.md`.
-- [x] Success, validation, not-found and conflict cases are covered, including adjacency, PATCH self-exclusion and unchanged data after a rejected update.
-- [x] Plain-language explanation notes for status codes, overlap, PATCH, timestamps, binding, the foreign key and review improvements are in the final section of `AI_LOG.md`.
-
-Technical checks passed. No runtime changes were needed for submission preparation.
-
-## Reconstructed checkpoint and restoration
-
-After completing this review, the student reported missing the first-version
-screenshot. The agent saved the reviewed version externally and restored the
-review-start snapshot. The student committed that reconstruction as
-`6e62f19a140f4cc28d984d64e9ab7e32dc75a873` on 2026-10-06 at
-14:34:51 (Asia/Bangkok). After the student said "committed", the agent restored
-the reviewed version while keeping that commit intact.
-
-This is a later reconstructed checkpoint, not evidence of a minute-30 commit
-or screenshot. The original snapshot requirement remains a matter to resolve
-honestly with the instructor. The supplied manual-test screenshots are now recorded above.

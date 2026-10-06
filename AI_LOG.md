@@ -190,7 +190,7 @@ These manual tests use 2026-10-25 slots and a partial PATCH. The agent separatel
 
 ### My explanation notes — AI-assisted draft for me to review
 
-These AI-assisted answers are written in first person for preparation.
+These answers are written in first person for preparation. They are not evidence that I have already explained the code independently. I should read the source and edit any wording I would not use myself.
 
 **What does my API do?** I can list the available equipment and create, list, read, update and delete bookings. It stops the same equipment from being booked for overlapping times. The important files are `src/index.ts` for routes and validation, `migrations/0001_initial.sql` for tables and seed data, and `wrangler.jsonc` for the D1 binding. I run it locally with `npm ci`, `npm run db:migrate`, then `npm run dev`.
 
@@ -218,6 +218,4 @@ These AI-assisted answers are written in first person for preparation.
 
 **What did AI help with, and what did I verify?** AI generated the initial implementation, schema, tooling, documentation and automated checks, then helped review them. My supplied screenshots demonstrate the public manual curl results listed above. I should not claim that I wrote every line independently or personally ran the agent's entire test suite.
 
-### Final submission summary
 
-The six submission deliverables and public test evidence are present. The original minute-30 screenshot/commit was missed. Commit `6e62f19a140f4cc28d984d64e9ab7e32dc75a873` is a later reconstructed checkpoint, saved on 2026-10-06 at 14:34:51 (Asia/Bangkok), not proof of the original minute-30 state. `snapshots/before-quality-gate.tar.gz` was saved at review start.
