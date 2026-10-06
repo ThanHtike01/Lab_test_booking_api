@@ -220,4 +220,4 @@ These AI-assisted answers are written in first person for preparation.
 
 ### Final submission summary
 
-**REVIEW WITH INSTRUCTOR.** The six submission deliverables and public test evidence are present. The original minute-30 screenshot/commit was missed. Commit `6e62f19a140f4cc28d984d64e9ab7e32dc75a873` is a later reconstructed checkpoint, saved on 2026-10-06 at 14:34:51 (Asia/Bangkok), not proof of the original minute-30 state. `snapshots/before-quality-gate.tar.gz` was saved at review start.
+The six submission deliverables and public test evidence are present. The original minute-30 screenshot/commit was missed. Commit `6e62f19a140f4cc28d984d64e9ab7e32dc75a873` is a later reconstructed checkpoint, saved on 2026-10-06 at 14:34:51 (Asia/Bangkok), not proof of the original minute-30 state. `snapshots/before-quality-gate.tar.gz` was saved at review start.

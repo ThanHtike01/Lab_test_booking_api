@@ -195,7 +195,7 @@ exact booking-value assertions, persistence checks, and cleanup of its records.
 Supplementary curls verified malformed JSON and that no test bookings remained.
 No source/schema/configuration change was made, so the existing public deployment
 was tested without redeployment. No load/concurrency or database-failure test was run.
-See `QUALITY_GATE_REVIEW.md` for findings, limitations and submission decision.
+See `QUALITY_GATE_REVIEW.md` for findings and limitations.
 
 ### Actual guide and edge-case output
 

@@ -1,6 +1,6 @@
 # Campus Equipment Booking API
 
-TypeScript + Hono + local SQLite through D1. This folder originally contained only `exam_brief_en.md` and `rubric_en.md`; no instructor starter was present. The structure is deliberately small: `src/index.ts`, one SQL migration, and local Wrangler tooling. The instructor's Quality Gate and curl guide have now been supplied; see `QUALITY_GATE_REVIEW.md` for the review and submission decision.
+TypeScript + Hono + local SQLite through D1. This folder originally contained only `exam_brief_en.md` and `rubric_en.md`; no instructor starter was present. The structure is deliberately small: `src/index.ts`, one SQL migration, and local Wrangler tooling. The instructor's Quality Gate and curl guide have now been supplied; see `QUALITY_GATE_REVIEW.md` for the review record.
 
 ## Install and run
 
@@ -131,4 +131,4 @@ A snapshot of the existing implementation was saved at the start of this review 
 
 The PDF contains 12 original screenshots showing 15 public HTTP requests. The evidence includes CRUD, 400/404/409 errors, adjacent bookings, PATCH self-exclusion and unchanged data after a rejected PATCH. The automated Quality Gate run separately recorded 63 checks.
 
-Current decision: **REVIEW WITH INSTRUCTOR**. See `QUALITY_GATE_REVIEW.md` for the review record and checkpoint history.
+See `QUALITY_GATE_REVIEW.md` for the review record and checkpoint history.

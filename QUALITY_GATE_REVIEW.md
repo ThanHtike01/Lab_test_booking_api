@@ -33,9 +33,9 @@ Archive SHA-256: `8907405f84eb71d5a48b238c915c4021df954c7598a58135b14478fd2df2a2
 
 This archive is a snapshot made at the start of this review. It is not evidence of the brief's minute-30 commit/screenshot. The student reported that the original first-version screenshot was missed. The later reconstructed commit is recorded below.
 
-## Submission decision
+## Submission summary
 
-**REVIEW WITH INSTRUCTOR.** The six submission deliverables and test evidence are complete.
+The six submission deliverables and test evidence are complete.
 
 - [x] Public manual curl evidence is supplied: 12 screenshots showing 15 requests, collected in `output/pdf/API_Test_Screenshot_Evidence.pdf` and indexed in `TEST_EVIDENCE.md`.
 - [x] Success, validation, not-found and conflict cases are covered, including adjacency, PATCH self-exclusion and unchanged data after a rejected update.
