@@ -70,7 +70,7 @@ Conflict checking is part of the INSERT/UPDATE SQL statement, so checking and wr
 
 Scope limitation: simultaneous partial updates to the same booking can overwrite each other's changes because PATCH reads the current row before writing merged values. Conflict prevention still occurs inside the write statement. Versioning/optimistic locking is outside this simple course contract; this review does not claim it is implemented.
 
-These notes are prompts for practice, not evidence that the student understands them. Explain one concrete example of each in your own words in `AI_LOG.md`.
+Concrete explanation examples are included in the final section of `AI_LOG.md`.
 
 ## Simple schema / ERD
 

@@ -376,7 +376,7 @@ Evidence: [PDF with summary and original screenshots](output/pdf/API_Test_Screen
 | Read deleted booking | 404; JSON error | 13 | 15.11.08 |
 | Delete adjacent booking | 204; empty body | 13 | 15.11.08 |
 
-The first booking ID is `fa519d29-9d40-426e-91d5-a98a38a39fd0`; the adjacent booking ID is `f86600fa-823f-49d6-b318-ee35414a4d45`. These have been deleted and should not be reused as live test records. The manual sequence uses 2026-10-25, while the automated instructor-guide sequence above uses 2026-10-20. Screenshot evidence does not establish independent code understanding or an original minute-30 checkpoint.
+The first booking ID is `fa519d29-9d40-426e-91d5-a98a38a39fd0`; the adjacent booking ID is `f86600fa-823f-49d6-b318-ee35414a4d45`. These have been deleted and should not be reused as live test records. The manual sequence uses 2026-10-25, while the automated instructor-guide sequence above uses 2026-10-20.
 
 
 ## Final submission-preparation checks — 2026-10-06

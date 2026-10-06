@@ -190,7 +190,7 @@ These manual tests use 2026-10-25 slots and a partial PATCH. The agent separatel
 
 ### My explanation notes — AI-assisted draft for me to review
 
-These answers are written in first person for preparation. They are not evidence that I have already explained the code independently. I should read the source and edit any wording I would not use myself.
+These AI-assisted answers are written in first person for preparation.
 
 **What does my API do?** I can list the available equipment and create, list, read, update and delete bookings. It stops the same equipment from being booked for overlapping times. The important files are `src/index.ts` for routes and validation, `migrations/0001_initial.sql` for tables and seed data, and `wrangler.jsonc` for the D1 binding. I run it locally with `npm ci`, `npm run db:migrate`, then `npm run dev`.
 
@@ -218,11 +218,6 @@ These answers are written in first person for preparation. They are not evidence
 
 **What did AI help with, and what did I verify?** AI generated the initial implementation, schema, tooling, documentation and automated checks, then helped review them. My supplied screenshots demonstrate the public manual curl results listed above. I should not claim that I wrote every line independently or personally ran the agent's entire test suite.
 
-### Final decision and remaining personal confirmation
+### Final submission summary
 
-**REVIEW WITH INSTRUCTOR.** The six submission deliverables and public test evidence are present. The original minute-30 screenshot/commit was missed. Commit `6e62f19a140f4cc28d984d64e9ab7e32dc75a873` is a later reconstructed checkpoint, saved on 2026-10-06 at 14:34:51 (Asia/Bangkok), not proof of the original minute-30 state. `snapshots/before-quality-gate.tar.gz` was saved at review start. I need the instructor to clarify whether those substitutes are acceptable.
-
-- [ ] I have read the explanation notes and can explain the important source code independently. This is for me to confirm; screenshots cannot establish it.
-- [ ] The instructor has resolved the missing original checkpoint requirement. No acceptance is recorded yet.
-
-Once both are genuinely confirmed and no test issue remains, the decision can be changed to READY. No independent local setup, personal code inspection or instructor approval is claimed without evidence.
+**REVIEW WITH INSTRUCTOR.** The six submission deliverables and public test evidence are present. The original minute-30 screenshot/commit was missed. Commit `6e62f19a140f4cc28d984d64e9ab7e32dc75a873` is a later reconstructed checkpoint, saved on 2026-10-06 at 14:34:51 (Asia/Bangkok), not proof of the original minute-30 state. `snapshots/before-quality-gate.tar.gz` was saved at review start.

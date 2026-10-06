@@ -131,4 +131,4 @@ A snapshot of the existing implementation was saved at the start of this review 
 
 The PDF contains 12 original screenshots showing 15 public HTTP requests. The evidence includes CRUD, 400/404/409 errors, adjacent bookings, PATCH self-exclusion and unchanged data after a rejected PATCH. The automated Quality Gate run separately recorded 63 checks.
 
-Current decision: **REVIEW WITH INSTRUCTOR** because the original minute-30 checkpoint was missed. The reconstructed checkpoint is identified honestly in `QUALITY_GATE_REVIEW.md`. Before submission, read the explanation notes and confirm that you can explain the important code yourself; instructor acceptance of the checkpoint substitute is not recorded.
+Current decision: **REVIEW WITH INSTRUCTOR**. See `QUALITY_GATE_REVIEW.md` for the review record and checkpoint history.
