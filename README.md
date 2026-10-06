@@ -1,6 +1,6 @@
-# Campus Equipment Booking API — first version
+# Campus Equipment Booking API
 
-TypeScript + Hono + local SQLite through D1. This folder originally contained only `exam_brief_en.md` and `rubric_en.md`; no instructor starter was present. The structure is deliberately small: `src/index.ts`, one SQL migration, and local Wrangler tooling. No Quality Gate review has been created.
+TypeScript + Hono + local SQLite through D1. This folder originally contained only `exam_brief_en.md` and `rubric_en.md`; no instructor starter was present. The structure is deliberately small: `src/index.ts`, one SQL migration, and local Wrangler tooling. The instructor's Quality Gate and curl guide have now been supplied; see `QUALITY_GATE_REVIEW.md` for the review and submission decision.
 
 ## Install and run
 
@@ -67,6 +67,17 @@ BASE_URL=https://campus-equipment-booking-api.thanhtike.workers.dev/api \
 
 Cloudflare deployment completed on 2026-10-06. See `TEST_EVIDENCE.md` for actual public verification results.
 
+## Quality Gate checks
+
+`scripts/quality_gate_checks.mjs` runs all nine guide cases, then checks additional overlap shapes, adjacency on both sides, PATCH self-exclusion, equipment changes, invalid data, exact response values, and unchanged database records after rejected updates. It invokes curl through Node.js without additional packages:
+
+```sh
+BASE_URL=https://campus-equipment-booking-api.thanhtike.workers.dev/api \
+  node scripts/quality_gate_checks.mjs
+```
+
+You can also follow `curl_test_guide.md` manually with the public Base API URL. Use a database with no other bookings on 2026-10-20 and with the 2026-10-22 09:00–10:00 UTC slot free for `eq-1`. The Quality Gate script removes only its own created records, including on assertion failure when the API is available. Do not run the two check scripts at the same time. The script verifies data values as well as statuses; inspect the printed responses yourself before filling in your AI log.
+
 ## Simple curl examples
 
 ```sh
@@ -92,7 +103,7 @@ bash scripts/curl_checks.sh
 bash scripts/curl_checks.sh | tee my-curl-results.txt
 ```
 
-The script creates two bookings, checks expected statuses and JSON shapes, and deletes its bookings after the successful sequence. Run against a database without overlapping bookings on 2026-10-20 for `eq-1`. If interrupted or failed, bookings may remain; list and delete those before rerunning. Each response is printed so it can be inspected. See `TEST_EVIDENCE.md` for agent-executed checks; personal verification remains blank in `AI_LOG.md`.
+The script creates two bookings, checks expected statuses and JSON shapes, and deletes its bookings after the successful sequence. Run against a database without overlapping bookings on 2026-10-20 for `eq-1`. If interrupted or failed, bookings may remain; list and delete those before rerunning. Each response is printed so it can be inspected. See `TEST_EVIDENCE.md` for agent-executed checks; student-supplied screenshot evidence and explanation notes are recorded in the final section of `AI_LOG.md`.
 
 ## Code to explain
 
@@ -104,4 +115,20 @@ The script creates two bookings, checks expected statuses and JSON shapes, and d
 
 The full contract and simple ERD are in `API_CONTRACT.md`; the schema is in `migrations/0001_initial.sql`. These choices follow the exam contract, using the [D1 prepared statement API](https://developers.cloudflare.com/d1/worker-api/prepared-statements/) and [Hono's Workers integration](https://hono.dev/docs/getting-started/cloudflare-workers).
 
-Before the instructor's Quality Gate stage, save a first-version screenshot or commit yourself. The instructor-provided starter and `curl_test_guide.md` were absent; if supplied later, compare their tooling with this local setup. The Quality Gate remains deferred.
+A snapshot of the existing implementation was saved at the start of this review in `snapshots/before-quality-gate.tar.gz`. It documents the version before these review improvements; it does not prove a screenshot/commit was taken at minute 30. Attach your original first-version screenshot or commit reference if you have one. The instructor starter is still absent; the curl guide is now included.
+
+
+## Submission files
+
+| Requirement | Included evidence |
+| --- | --- |
+| Runnable source and run instructions | `src/index.ts`, `package.json`, lockfile, Wrangler/TypeScript configuration, and the install/run commands above |
+| API contract | `API_CONTRACT.md` |
+| Brief schema / ERD | ERD in `API_CONTRACT.md`; executable schema and seeds in `migrations/0001_initial.sql` |
+| AI assistance and verification record | `AI_LOG.md`, including final explanation notes and screenshot-supported checks |
+| Quality Gate review | `QUALITY_GATE_REVIEW.md`, with four findings, actions and evidence |
+| At least five tests and tested Base API URL | `TEST_EVIDENCE.md` and `output/pdf/API_Test_Screenshot_Evidence.pdf`; originals in `screenshot/` |
+
+The PDF contains 12 original screenshots showing 15 public HTTP requests. The evidence includes CRUD, 400/404/409 errors, adjacent bookings, PATCH self-exclusion and unchanged data after a rejected PATCH. The automated Quality Gate run separately recorded 63 checks.
+
+Current decision: **REVIEW WITH INSTRUCTOR** because the original minute-30 checkpoint was missed. The reconstructed checkpoint is identified honestly in `QUALITY_GATE_REVIEW.md`. Before submission, read the explanation notes and confirm that you can explain the important code yourself; instructor acceptance of the checkpoint substitute is not recorded.

@@ -1,6 +1,6 @@
-# First-version API contract
+# API contract
 
-Source of truth: `exam_brief_en.md` and `rubric_en.md`. This is the pre-Quality-Gate version.
+Source of truth: `exam_brief_en.md` and `rubric_en.md`. Reviewed using `quality_gate.md` and `curl_test_guide.md`; endpoint behaviour is unchanged from the first version.
 
 Public Base API URL (submission): `https://campus-equipment-booking-api.thanhtike.workers.dev/api`
 
@@ -58,6 +58,19 @@ The brief does not specify PATCH omission semantics or time boundary handling; t
 Intervals include the start and exclude the end. A booking ending at 11:00 can be followed by one starting at 11:00. Overlap means `existing.startAt < requested.endAt AND existing.endAt > requested.startAt`. PATCH checks the merged booking and excludes its own ID. Other equipment can be booked at the same time.
 
 Conflict checking is part of the INSERT/UPDATE SQL statement, so checking and writing happen together. Every request-derived SQL value is passed to `.bind(...)` using `?` placeholders.
+
+## Explain the decisions (ownership practice)
+
+- **400** means the supplied booking data is invalid. An unknown `equipmentId` is an invalid reference in the payload. **404** means the booking identified in the URL is absent. PATCH looks up that booking first, so a missing booking returns 404 even if its payload is also invalid. **409** means otherwise valid data conflicts with another reservation. **204** means deletion succeeded and there is no response body.
+- For an existing booking **[12:00,14:00)**, a request **[13:00,15:00)** overlaps because `12:00 < 15:00` and `14:00 > 13:00`. A request **[14:00,15:00)** does not: `14:00 > 14:00` is false. A request enclosing the whole existing interval also conflicts; checking only the new start would miss it.
+- PATCH merges supplied fields into the current booking before checking time order, equipment, and conflicts. `id <> ?` excludes only that booking, not other bookings for the same equipment. A purpose-only update must still succeed while retaining the original equipment and times.
+- `WHERE NOT EXISTS` guards the INSERT/UPDATE itself. A separate SELECT followed by an unconditional write could allow two requests to pass the check before either wrote. The current statement keeps the conflict decision and write together. This review does not claim a load/concurrency test was executed.
+- Fixed-width UTC strings make chronological and SQL text comparison agree. The format restrictions, partial PATCH support, trimming, rejecting unknown fields, and allowing adjacent bookings are documented assumptions; the brief mandates the route names, fields, status codes, equipment existence, time order, and absence of overlaps.
+- The foreign key ensures each booking refers to equipment. It does not detect time conflicts. `?` placeholders and `.bind(...)` keep values separate from SQL syntax; an apostrophe in a name is stored as text.
+
+Scope limitation: simultaneous partial updates to the same booking can overwrite each other's changes because PATCH reads the current row before writing merged values. Conflict prevention still occurs inside the write statement. Versioning/optimistic locking is outside this simple course contract; this review does not claim it is implemented.
+
+These notes are prompts for practice, not evidence that the student understands them. Explain one concrete example of each in your own words in `AI_LOG.md`.
 
 ## Simple schema / ERD
 
